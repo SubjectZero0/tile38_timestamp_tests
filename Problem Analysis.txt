@@ -14,7 +14,7 @@ Here, I am going to describe the problem as I understand it.
 
 Plan of attack:
 
-1)Create add 2D point with a timestamp FIELD.
+1)Create a 2D point with a timestamp FIELD.
 2)Create a roaming Geofence with a timestamp FIELD.
 3) SETHOOK to DETECT events
 4)Assert if:
