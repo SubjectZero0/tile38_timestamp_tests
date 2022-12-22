@@ -1,5 +1,5 @@
 import redis
-
+from geojson import Polygon
 
 def main():
     def test_SETHOOK():
@@ -9,28 +9,23 @@ def main():
 
         """
         # Connect to the Tile38 server
-        client = redis.Redis(host='localhost', port=9851)
+        client = redis.Redis(host='localhost', port=9851, db=0)
 
         #test the client responds
         client.ping()
 
-        # Clear any existing points in the fleet
-        client.execute_command("DROP", "fleet")
+        # Clear any existing data
+        client.execute_command("FLUSHDB")
 
-        # Add a point to the fleet
-        client.execute_command("SET", "fleet", "p1","POINT", 37.7, -122.4, "FIELD", "speed", 75)
+        #create a polygon to set as a geofence
+        geo_json= Polygon([[(2.38, 57.322), (23.194, -20.28), (-120.43, 19.15), (2.38, 57.322)]])
 
-        #Add a geofence for the fleet
-        client.execute_command("NEARBY", "fleet","FENCE", "POINT",37.7, -122.4, 10000)
-
-        #Set the Hook for the geofence
-        res = client.execute_command('SETHOOK', 'inline_tests', 'http://localhost:9851/hook',"NEARBY","fleet","FENCE","DETECT","enter,exit,inside,cross","POINT", 37.7, -122.4)
+        #Set WITHIN Hook for the geofence
+        client.execute_command('SETHOOK', 'inline_tests', 'http://localhost:5000/hook',"WITHIN","fleet","FENCE","DETECT","enter,exit,inside,cross","OBJECT", geo_json)
 
         # Add more points to the fleet, to trigger the hook.
-        client.execute_command("SET", "fleet", "p2", "POINT", 37.8, -122.5, "FIELD", "speed", 50)
-        client.execute_command("SET", "fleet", "p3", "POINT", 37.9, -122.6, "FIELD", "speed", 25)
+        client.execute_command("SET", "fleet", "p1", "POINT", 57.321,2.379, "FIELD", "speed", 50, "FIELD", "timestamp", 1671731640)
 
-        return res
 
     test_SETHOOK()
 
@@ -38,6 +33,6 @@ if __name__=="__main__":
     main()
 
 """
-Note: Need to setup a webhook listener, in order to access http://localhost:9851/hook. The listener will be set up in Flask.
+Note: Need to setup a webhook listener, in order to access http://localhost:5000/hook. The listener will be set up in Flask.
 
 """

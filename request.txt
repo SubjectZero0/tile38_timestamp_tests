@@ -1,0 +1,1 @@
+{'command': 'set', 'group': '63a49de98c4e00355436ec03', 'detect': 'inside', 'hook': 'inline_tests', 'key': 'fleet', 'time': '2022-12-22T20:11:53.1172498+02:00', 'id': 'p1', 'object': {'type': 'Point', 'coordinates': [2.379, 57.321]}, 'fields': {'speed': 50, 'timestamp': 1671731640}}
