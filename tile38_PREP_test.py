@@ -37,18 +37,6 @@ def test_create_point():
 #------------------END OF PREP TESTS-------------------
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
     test_create_point()
     
