@@ -2,15 +2,15 @@
 
 **Problem Analysis(breakdown):**
 
--Let points be a collection of planar spatial data(2D space). Then:
+-   Let points be a collection of planar spatial data(2D space). Then:
 
-    -If tile38 allows for the addition of a timestamp on these points:
+    -   If tile38 allows for the addition of a timestamp on these points:
 
-        1) does tile38 perceive timestamps as an additional dimension, or,
+        a. does tile38 perceive timestamps as an additional dimension, or,
 
-        2) does tile38 simply add a timestamp as "alphanumerical" data?
+        b. does tile38 simply add a timestamp as "alphanumerical" data?
 
-        3) can events(cross, enter, exit and inside) derive time data based on these timestamps?
+        c. can events(cross, enter, exit and inside) derive time data based on these timestamps?
 
 **Plan of attack:**
 
