@@ -12,29 +12,28 @@
 
         c. can events(cross, enter, exit and inside) derive time data based on these timestamps?
 
+---
+
 **Plan of attack:**
 
 1. Create Test and connect to tile38 Server via Redis:
 
-    a) Create Geofence from Polygon with SETHOOK command to DETECT events.
+    a. Create Geofence from Polygon with SETHOOK command to DETECT events.
 
-    b) Create a 2D point with a timestamp FIELD, that triggers an event.
+    b. Create 2D-3D points with a timestamp FIELD, that trigger an event.
 
 2. Create Webhook listener in a flask app.
 
-3. command:flask run
+3. command: python server.py
 
-4. While flask app is up, debug the TEST file
+4. While flask server is up,set breakpoints and debug the **_tile38_assignment_solution.py_** file
 
-5. Observe the request json. Assert if:
-
-    -Events have timestamps. If they do:
-
-    -is the timestamp a completely new one, or is it one of the previously defined ones?
+5. Observe the request.txt.
 
 ---
 
-Test idea:
-If a point with (X,Y,tstamp) considers tstamp to be a third spatial dimension, instead of temporal,
-then, 2 points with the same X, Y but different tstamp, will NEVER trigger an event.
-That means, tstamp(int) behaves as Height and not as time.
+**Final Assertion:**
+
+When a point with **(X,Y,tstamp)** triggers an event, the **_tstamp dimension_** is considered to be a spatial parameter, not a temporal one.
+Therefore, adding a timestamp/Z-dimension on 2D-data, is a neat trick to perform calculations on that dimension,
+but when 3D-data is essential, timestamp has no place as a dimension (4D points are not allowed).
