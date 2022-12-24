@@ -9,7 +9,7 @@ def to_dict(a):
     #helper function to convert bytes object to dict
     return ast.literal_eval(a.decode('utf-8'))
 
-#--------------------PREP TESTS-------------------------
+#--------------------PREP TEST-------------------------
 
 def test_create_point():
     """
@@ -34,7 +34,7 @@ def test_create_point():
 
 
 
-#------------------END OF PREP TESTS-------------------
+#------------------END OF PREP TEST-------------------
 
 
 if __name__ == '__main__':
