@@ -1,4 +1,4 @@
-from flask import Flask,request
+from flask import Flask,request,abort
 
 app=Flask(__name__)
 
@@ -6,12 +6,22 @@ app=Flask(__name__)
 def webhook():
     #create a webhook
     if request.method=='POST':
+
         print("Webhook Triggered!") #message
+
         # Create a .txt with the request json
         with open("request.txt", "w") as f:
-            f.write(f"{request.json}")
+            f.write('{\n')
+            for key in request.json:
+                f.write(f"  '{key}' : {request.json[key]},\n")
+                
+            f.write("}\n")
+
         return "request.txt"
-    return "OK"
+    else:
+        
+        return abort(400)
+    
         
 if __name__ == '__main__':
     #DEBUG is SET to TRUE. CHANGE FOR PROD
